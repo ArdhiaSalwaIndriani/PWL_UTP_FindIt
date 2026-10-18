@@ -1,0 +1,4 @@
+@props(['aksi', 'label' => 'Tolak'])
+<details class="w-full sm:w-auto"><summary class="inline-flex cursor-pointer list-none bg-bahaya-muda px-4 py-2.5 text-sm font-semibold text-bahaya transition hover:bg-bahaya/20 [&::-webkit-details-marker]:hidden">{{ $label }}</summary>
+    <form method="POST" action="{{ $aksi }}" class="mt-3 space-y-3 border border-bahaya/20 bg-white p-4">@csrf @method('PATCH')<label for="alasan-{{ md5($aksi) }}" class="block text-sm font-medium">Alasan penolakan</label><textarea id="alasan-{{ md5($aksi) }}" name="alasan_penolakan" rows="3" maxlength="500" required class="block w-full border border-ink/20 bg-white px-3 py-2.5 text-sm focus:border-amalfi focus:outline-none focus:ring-2 focus:ring-sea"></textarea>@error('alasan_penolakan')<p class="text-xs text-bahaya">{{ $message }}</p>@enderror<x-tombol type="submit" varian="bahaya">Kirim penolakan</x-tombol></form>
+</details>
