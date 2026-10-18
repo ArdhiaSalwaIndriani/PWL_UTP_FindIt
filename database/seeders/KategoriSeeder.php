@@ -10,10 +10,12 @@ class KategoriSeeder extends Seeder
     public function run(): void
     {
         $kategori = [
-            'Barang',
-            'Kendaraan',
-            'Orang',
-            'Hewan',
+            'Elektronik',
+            'Dompet',
+            'Dokumen',
+            'Kunci',
+            'Pakaian',
+            'Alat Tulis',
         ];
 
         foreach ($kategori as $nama) {
