@@ -1,0 +1,6 @@
+@extends('layouts.admin')
+@section('judul', 'Detail Laporan Hilang')
+@section('konten')
+<x-judul-halaman judul="Detail Laporan Hilang"><x-tombol varian="garis" :href="route('admin.laporan-hilang.index')">Kembali</x-tombol></x-judul-halaman>
+<div class="grid gap-6 lg:grid-cols-3"><x-kartu class="space-y-4 lg:col-span-2">@if ($laporan->foto)<img src="{{ asset('storage/' . $laporan->foto) }}" alt="{{ $laporan->nama_barang }}" class="aspect-[4/3] w-full object-contain bg-gelato">@endif<div class="flex items-center justify-between gap-3"><h2 class="text-xl font-semibold">{{ $laporan->nama_barang }}</h2><x-badge-status :status="$laporan->status" /></div><p class="text-sm text-ink/60">{{ $laporan->kategori->nama }}</p><p class="whitespace-pre-line text-sm">{{ $laporan->deskripsi }}</p><p class="text-sm">{{ $laporan->lokasi_kehilangan }} · {{ $laporan->tanggal_kehilangan->translatedFormat('d F Y') }}</p><div class="border-t pt-4 text-sm"><p>Pelapor: {{ $laporan->pelapor->nama }} ({{ $laporan->pelapor->email }})</p><p class="text-xs text-ink/60">Dilaporkan {{ $laporan->created_at->translatedFormat('d F Y, H:i') }}</p></div></x-kartu>@include('partials.panel-verifikasi', ['laporan' => $laporan, 'prefix' => 'laporan-hilang', 'opsiStatus' => ['menunggu', 'selesai']])</div>
+@endsection

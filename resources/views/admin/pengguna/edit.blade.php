@@ -1,0 +1,3 @@
+@extends('layouts.admin')
+@section('judul', 'Edit Pengguna')
+@section('konten')<x-judul-halaman judul="Edit Data Pengguna" /><x-kartu class="max-w-md"><form method="POST" action="{{ route('admin.pengguna.update', $pengguna) }}" class="space-y-5">@csrf @method('PUT')<x-field nama="nama" label="Nama" :nilai="$pengguna->nama" wajib /><x-field nama="email" label="Email" tipe="email" :nilai="$pengguna->email" wajib /><p class="text-xs text-ink/60">Peran akun tidak dapat diubah dari halaman ini.</p><div class="flex gap-3"><x-tombol type="submit" varian="aksen">Simpan</x-tombol><x-tombol varian="garis" :href="route('admin.pengguna.show', $pengguna)">Batal</x-tombol></div></form></x-kartu>@endsection
