@@ -1,0 +1,7 @@
+@extends('layouts.admin')
+@section('judul', 'Detail Pengguna')
+@section('konten')
+<x-judul-halaman judul="Detail Pengguna"><x-tombol varian="garis" :href="route('admin.pengguna.index')">Kembali</x-tombol><x-tombol varian="aksen" :href="route('admin.pengguna.edit', $pengguna)">Edit</x-tombol></x-judul-halaman>
+<x-kartu><div class="flex flex-wrap items-center gap-5">@if ($pengguna->foto_profil)<img src="{{ asset('storage/' . $pengguna->foto_profil) }}" alt="" class="size-20 object-cover">@else<div class="grid size-20 place-items-center bg-gelato text-2xl font-semibold text-amalfi">{{ mb_strtoupper(mb_substr($pengguna->nama, 0, 1)) }}</div>@endif<div><h2 class="text-xl font-semibold">{{ $pengguna->nama }}</h2><p class="text-sm text-ink/60">{{ $pengguna->email }}</p><div class="mt-2 flex gap-2"><span class="bg-amalfi px-2 py-1 text-xs text-white">{{ ucfirst($pengguna->peran) }}</span><span class="px-2 py-1 text-xs {{ $pengguna->aktif ? 'bg-sea/30 text-amalfi' : 'bg-bahaya-muda text-bahaya' }}">{{ $pengguna->aktif ? 'Aktif' : 'Nonaktif' }}</span></div><p class="mt-2 text-xs text-ink/60">Bergabung {{ $pengguna->created_at->translatedFormat('d F Y') }}</p></div></div></x-kartu>
+<div class="mt-5 grid gap-4 sm:grid-cols-3">@foreach ([['Laporan hilang', $pengguna->laporan_hilang_count], ['Laporan temuan', $pengguna->laporan_temuan_count], ['Klaim', $pengguna->klaim_count]] as [$label, $count])<x-kartu><p class="text-2xl font-semibold">{{ $count }}</p><p class="text-sm text-ink/60">{{ $label }}</p></x-kartu>@endforeach</div>
+@endsection
