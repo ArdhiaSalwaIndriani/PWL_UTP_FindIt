@@ -1,0 +1,7 @@
+@extends('layouts.user')
+@section('judul', 'Barang Tersedia')
+@section('konten')
+<x-judul-halaman judul="Barang Temuan Tersedia" sub="Pilih barang yang diduga milik Anda" />
+<x-kartu class="mb-5"><x-filter-cari :daftar-kategori="$daftarKategori" /></x-kartu>
+@if ($barang->isEmpty())<x-kosong judul="Belum ada barang tersedia" />@else<div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">@foreach ($barang as $item)<x-kartu :padding="false" class="overflow-hidden"><div class="aspect-[4/3] bg-gelato">@if ($item->foto)<img src="{{ asset('storage/' . $item->foto) }}" alt="{{ $item->nama_barang }}" class="h-full w-full object-cover">@else<div class="grid h-full place-items-center text-sm text-ink/50">Tanpa foto</div>@endif</div><div class="space-y-2 p-4"><h2 class="font-semibold">{{ $item->nama_barang }}</h2><p class="text-xs text-ink/60">{{ $item->kategori->nama }}</p><p class="text-sm">{{ $item->lokasi_ditemukan }}</p><p class="text-xs text-ink/60">{{ $item->tanggal_ditemukan->translatedFormat('d F Y') }}</p>@if (in_array($item->id, $sudahDiklaim))<x-badge-status status="menunggu" /><p class="text-xs text-ink/60">Klaim Anda sedang diperiksa</p><a href="{{ route('klaim.index') }}" class="text-xs font-semibold text-amalfi hover:underline">Lihat klaim</a>@else<x-tombol varian="aksen" :href="route('klaim.create', $item)">Ajukan Klaim</x-tombol>@endif</div></x-kartu>@endforeach</div><div class="mt-6">{{ $barang->links() }}</div>@endif
+@endsection
