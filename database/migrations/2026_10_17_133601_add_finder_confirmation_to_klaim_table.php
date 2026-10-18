@@ -1,0 +1,29 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::table('klaim', function (Blueprint $table) {
+            $table->timestamp('dikonfirmasi_penemu_pada')->nullable();
+            $table->timestamp('diserahkan_penemu_pada')->nullable();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::table('klaim', function (Blueprint $table) {
+            $table->dropColumn(['dikonfirmasi_penemu_pada', 'diserahkan_penemu_pada']);
+        });
+    }
+};
